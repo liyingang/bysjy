@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bysjy.mapper.EnterpriseMapper">
+  <resultMap id="BaseResultMap" type="com.bysjy.po.Enterprise">
+    <id column="e_id" jdbcType="CHAR" property="eId" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="legal" jdbcType="VARCHAR" property="legal" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="addr" jdbcType="VARCHAR" property="addr" />
+    <result column="refirm" jdbcType="CHAR" property="refirm" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    e_id, pwd, name, tel, legal, email, addr, refirm
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from enterprise
+    where e_id = #{eId,jdbcType=CHAR}
+  </select>
+  <select id="getEnterprises" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from enterprise
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from enterprise
+    where e_id = #{eId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bysjy.po.Enterprise">
+    insert into enterprise (e_id, pwd, name, 
+      tel, legal, email, 
+      addr, refirm)
+    values (#{eId,jdbcType=CHAR}, #{pwd,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{legal,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{addr,jdbcType=VARCHAR}, #{refirm,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bysjy.po.Enterprise">
+    insert into enterprise
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eId != null">
+        e_id,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="legal != null">
+        legal,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="addr != null">
+        addr,
+      </if>
+      <if test="refirm != null">
+        refirm,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eId != null">
+        #{eId,jdbcType=CHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="legal != null">
+        #{legal,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null">
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="refirm != null">
+        #{refirm,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bysjy.po.Enterprise">
+    update enterprise
+    <set>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="legal != null">
+        legal = #{legal,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null">
+        addr = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="refirm != null">
+        refirm = #{refirm,jdbcType=CHAR},
+      </if>
+    </set>
+    where e_id = #{eId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bysjy.po.Enterprise">
+    update enterprise
+    set pwd = #{pwd,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      legal = #{legal,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      addr = #{addr,jdbcType=VARCHAR},
+      refirm = #{refirm,jdbcType=CHAR}
+    where e_id = #{eId,jdbcType=CHAR}
+  </update>
+</mapper>

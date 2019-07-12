@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bysjy.mapper.ResumeMapper">
+  <resultMap id="BaseResultMap" type="com.bysjy.po.Resume">
+    <id column="r_id" jdbcType="CHAR" property="rId" />
+    <result column="s_id" jdbcType="CHAR" property="sId" />
+    <result column="apply" jdbcType="VARCHAR" property="apply" />
+    <result column="sshow" jdbcType="CHAR" property="sshow" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bysjy.po.ResumeWithBLOBs">
+    <result column="society" jdbcType="LONGVARCHAR" property="society" />
+    <result column="personal" jdbcType="LONGVARCHAR" property="personal" />
+  </resultMap>
+  <resultMap extends="ResultMapWithBLOBs" id="ResultMapWithName" type="com.bysjy.po.ResumeWithName">
+    <result column="name" jdbcType="LONGVARCHAR" property="name" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    r_id, s_id, apply, sshow
+  </sql>
+  <sql id="Blob_Column_List">
+    society, personal
+  </sql>
+  <sql id="base_list">
+    r_id,r.s_id,s.name,apply,society,personal
+  </sql>
+  <select id="select" parameterType="String" resultMap="ResultMapWithName">
+    select
+    <include refid="base_list" />
+    from resume as r,student as s
+    where r.sshow="1" and r.s_id=s.s_id;
+  </select>
+  <select id="selectById" parameterType="String" resultMap="ResultMapWithName">
+    select
+    <include refid="base_list" />
+    from resume as r,student as s
+    where r_id = #{rId,jdbcType=CHAR} and r.s_id=s.s_id;
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from resume
+    where r_id = #{rId,jdbcType=CHAR}
+  </select>
+  <select id="selectBySId" parameterType="String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from resume
+    where s_id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from resume
+    where r_id = #{rId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bysjy.po.ResumeWithBLOBs">
+    insert into resume (r_id, s_id, apply, sshow, 
+      society, personal)
+    values (#{rId,jdbcType=CHAR}, #{sId,jdbcType=CHAR}, #{apply,jdbcType=VARCHAR}, #{sshow,jdbcType=CHAR}, 
+      #{society,jdbcType=LONGVARCHAR}, #{personal,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bysjy.po.ResumeWithBLOBs">
+    insert into resume
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rId != null">
+        r_id,
+      </if>
+      <if test="sId != null">
+        s_id,
+      </if>
+      <if test="apply != null">
+        apply,
+      </if>
+      <if test="sshow != null">
+        sshow,
+      </if>
+      <if test="society != null">
+        society,
+      </if>
+      <if test="personal != null">
+        personal,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rId != null">
+        #{rId,jdbcType=CHAR},
+      </if>
+      <if test="sId != null">
+        #{sId,jdbcType=CHAR},
+      </if>
+      <if test="apply != null">
+        #{apply,jdbcType=VARCHAR},
+      </if>
+      <if test="sshow != null">
+        #{sshow,jdbcType=CHAR},
+      </if>
+      <if test="society != null">
+        #{society,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="personal != null">
+        #{personal,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bysjy.po.ResumeWithBLOBs">
+    update resume
+    <set>
+      <if test="sId != null">
+        s_id = #{sId,jdbcType=CHAR},
+      </if>
+      <if test="apply != null">
+        apply = #{apply,jdbcType=VARCHAR},
+      </if>
+      <if test="sshow != null">
+        sshow = #{sshow,jdbcType=CHAR},
+      </if>
+      <if test="society != null">
+        society = #{society,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="personal != null">
+        personal = #{personal,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where r_id = #{rId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bysjy.po.ResumeWithBLOBs">
+    update resume
+    set s_id = #{sId,jdbcType=CHAR},
+      apply = #{apply,jdbcType=VARCHAR},
+      sshow = #{sshow,jdbcType=CHAR},
+      society = #{society,jdbcType=LONGVARCHAR},
+      personal = #{personal,jdbcType=LONGVARCHAR}
+    where r_id = #{rId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bysjy.po.Resume">
+    update resume
+    set s_id = #{sId,jdbcType=CHAR},
+      apply = #{apply,jdbcType=VARCHAR},
+      sshow = #{sshow,jdbcType=CHAR}
+    where r_id = #{rId,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>毕业生就业系统</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/font-awesome.css">
+    <link rel="stylesheet" href="../js/morris/morris-0.4.3.min.css">
+    <link rel="stylesheet" href="../css/custom-styles.css"  />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="../css/graduate-apply.css">
+    <link rel="stylesheet" href="../js/dataTables/dataTables.bootstrap.css">
+
+</head>
+<body>
+<div id="wrapper">
+    <!--最上边的导航-->
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <!--左边标志-->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="school-stu-info.html">管理员端</a>
+        </div>
+        <!--右边的导航-->
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-envelope fa-fw"></i> 信息<i class="fa fa-caret-down"></i>
+                </a>
+                <!--消息-->
+                <ul class="dropdown-menu dropdown-messages">
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>人名</strong>
+                                <span class="pull-right text-muted">
+                                        <em>时间</em>
+                                    </span>
+                            </div>
+                            <div>事件</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>人名</strong>
+                                <span class="pull-right text-muted">
+                                        <em>时间</em>
+                                    </span>
+                            </div>
+                            <div>事件</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">
+                            <div>
+                                <strong>人名</strong>
+                                <span class="pull-right text-muted">
+                                        <em>时间</em>
+                                    </span>
+                            </div>
+                            <div>事件</div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="text-center" href="#">
+                            <strong>查看所有信息</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-messages -->
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> 用户<i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="school-stu-info.html"><i class="fa fa-user fa-fw"></i> 学生信息管理</a></li>
+                    <li><a href="school-enter-app.html"><i class="fa fa-user fa-fw"></i> 企业招聘管理</a></li>
+                    <li><a href="school-backup.html"><i class="fa fa-gear fa-fw"></i> 数据备份</a></li>
+                    <li><a href="school-statistic.html"><i class="fa fa-gear fa-fw"></i>数据统计</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </nav>
+    <!--左边导航栏-->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a class="active-menu" href="school-stu-info.html">
+                        <i class="fa fa-edit"></i> 学生信息管理</a>
+                </li>
+                <li>
+                    <a href="school-enter-app.html"><i class="fa fa-edit"></i>企业招聘管理</a>
+                </li>
+                <li>
+                    <a href="school-backup.html"><i class="fa fa-bar-chart-o"></i>数据备份</a>
+                </li>
+                <li>
+                    <a href="school-statistic.html"><i class="fa fa-qrcode"></i>数据统计</a>
+                </li>
+            </ul>
+
+        </div>
+
+    </nav>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-header">
+                        学生信息管理 <small>管理学生信息</small>
+                    </h1>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-inline" method="get" id="form">
+                        <div class="form-group">
+                            <label for="sno">账号</label>
+                            <input type="text" class="form-control" id="sno" name="sno" />
+                        </div>
+                        <div class="form-group">
+                            <label for="name">姓名</label>
+                            <input type="text" class="form-control" id="name" name="name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="age">年龄</label>
+                            <input type="text" class="form-control" id="age" name="age" />
+                        </div>
+                        <div class="form-group">
+                            <label for="sex">性别</label>
+                            <select class="form-control" id="sex" name="sex">
+                                <option value="">--请选择--</option>
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tel">电话</label>
+                            <input type="text" class="form-control" id="tel" name="tel" />
+                        </div>
+                        <div class="form-group">
+                            <label for="edu">学历</label>
+                            <input type="text" class="form-control" id="edu" name="edu" />
+                        </div>
+                        <div class="form-group">
+                            <label for="dept">学院</label>
+                            <input type="text" class="form-control" id="dept" name="dept" />
+                        </div>
+                        <div class="form-group">
+                            <label for="professional">专业</label>
+                            <input type="text" class="form-control" id="professional" name="professional" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">查询</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            学生信息列表
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables">
+                                    <thead>
+                                    <tr>
+                                        <th>学号</th>
+                                        <th>姓名</th>
+                                        <th>年龄</th>
+                                        <th>性别</th>
+                                        <th>电话</th>
+                                        <th>学历</th>
+                                        <th>学院</th>
+                                        <th>专业</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${sessionScope.others}" var="row">
+                                        <tr>
+                                            <td>${row.name}</td>
+                                            <td>${row.cName}</td>
+                                            <td>${row.post}</td>
+                                            <td>${row.salary}</td>
+                                            <td>${row.tel}</td>
+                                            <td>${row.sex}</td>
+                                            <td>${row.age}</td>
+                                            <td>${row.age}</td>
+                                            <td>
+                                                <input type="button" class="btn btn-primary btn-xs" data-toggle="modal"
+                                                       data-target="#DetailDialog" onclick="see('${row.sshow}',${row.sId})" value="详细信息"/>
+                                                <input type="button" class="btn btn-primary btn-xs" data-toggle="modal"
+                                                       data-target="#DetailDialog" onclick="see('${row.sshow}',${row.sId})" value="修改"/>
+                                                <input type="button" class="btn btn-primary btn-xs" data-toggle="modal"
+                                                       data-target="#DetailDialog" onclick="see('${row.sshow}',${row.sId})" value="删除"/>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+            <footer><p>Copyright &copy; 2016.Company name All rights reserved.</footer>
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+</div>
+<script src="../js/jquery-1.10.2.js"></script>
+<!-- Bootstrap Js -->
+<script src="../js/bootstrap.min.js"></script>
+<!-- Metis Menu Js -->
+<script src="../js/jquery.metisMenu.js"></script>
+<!-- Custom Js -->
+<script src="../js/custom-scripts.js"></script>
+<!-- Morris Chart Js -->
+<script src="../js/morris/raphael-2.1.0.min.js"></script>
+<script src="../js/morris/morris.js"></script>
+<!-- DATA TABLE SCRIPTS -->
+<script src="../js/dataTables/jquery.dataTables.js"></script>
+<script src="../js/dataTables/dataTables.bootstrap.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#dataTables').dataTable({
+            "bPaginate": true,  //是否显示分页
+            "bFilter": false,//搜索栏
+            "oLanguage": {
+                sLengthMenu: "每页显示 _MENU_ 条记录",
+                sZeroRecords: "对不起，没有匹配的数据",
+                sInfo: "第 _START_ - _END_ 条 / 共 _TOTAL_ 条数据",
+                sInfoEmpty: "没有匹配的数据",
+                sInfoFiltered: "(数据表中共 _MAX_ 条记录)",
+                sProcessing: "正在加载中...",
+                sSearch: "全文搜索：",
+                oPaginate: {
+                    sFirst: "第一页",
+                    sPrevious: " 上一页 ",
+                    sNext: " 下一页 ",
+                    sLast: " 最后一页 "
+                }
+            }
+        });
+        var table =$('#dataTables-example').DataTable();
+        $("#search").click(function () {
+            var v=$('#apply');
+            if(v.val() !=='')
+                console.log(v.find("option:selected").text());
+           table.columns(0).search(v.find("option:selected").text()).draw();
+
+        });
+        $("#apply").change(function(){
+                if($(this).val() !==''){
+                table.columns(0).search($(this).find("option:selected").text()).draw();
+            }
+             });
+    });
+</script>
+
+</body>
+</html>

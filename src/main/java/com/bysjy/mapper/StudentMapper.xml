@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bysjy.mapper.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.bysjy.po.Student">
+    <id column="s_id" jdbcType="CHAR" property="sId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="edu" jdbcType="VARCHAR" property="edu" />
+    <result column="dept" jdbcType="VARCHAR" property="dept" />
+    <result column="professional" jdbcType="VARCHAR" property="professional" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="birth" jdbcType="VARCHAR" property="birth" />
+    <result column="home" jdbcType="VARCHAR" property="home" />
+    <result column="employed" jdbcType="VARCHAR" property="employed" />
+    <result column="sshow" jdbcType="CHAR" property="sshow" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    s_id, name, age, sex, tel, edu, dept, professional, pwd, birth, home, employed, sshow
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where s_id = #{sId,jdbcType=CHAR}
+  </select>
+  <select id="getStudents" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from student
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from student
+    where s_id = #{sId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bysjy.po.Student">
+    insert into student (s_id, name, age, 
+      sex, tel, edu, dept, 
+      professional, pwd, birth, 
+      home, employed, sshow)
+    values (#{sId,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{sex,jdbcType=CHAR}, #{tel,jdbcType=VARCHAR}, #{edu,jdbcType=VARCHAR}, #{dept,jdbcType=VARCHAR}, 
+      #{professional,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR}, 
+      #{home,jdbcType=VARCHAR}, #{employed,jdbcType=VARCHAR}, #{sshow,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bysjy.po.Student">
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sId != null">
+        s_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="edu != null">
+        edu,
+      </if>
+      <if test="dept != null">
+        dept,
+      </if>
+      <if test="professional != null">
+        professional,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+      <if test="birth != null">
+        birth,
+      </if>
+      <if test="home != null">
+        home,
+      </if>
+      <if test="employed != null">
+        employed,
+      </if>
+      <if test="sshow != null">
+        sshow,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sId != null">
+        #{sId,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="edu != null">
+        #{edu,jdbcType=VARCHAR},
+      </if>
+      <if test="dept != null">
+        #{dept,jdbcType=VARCHAR},
+      </if>
+      <if test="professional != null">
+        #{professional,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="home != null">
+        #{home,jdbcType=VARCHAR},
+      </if>
+      <if test="employed != null">
+        #{employed,jdbcType=VARCHAR},
+      </if>
+      <if test="sshow != null">
+        #{sshow,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bysjy.po.Student">
+    update student
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="edu != null">
+        edu = #{edu,jdbcType=VARCHAR},
+      </if>
+      <if test="dept != null">
+        dept = #{dept,jdbcType=VARCHAR},
+      </if>
+      <if test="professional != null">
+        professional = #{professional,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        birth = #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="home != null">
+        home = #{home,jdbcType=VARCHAR},
+      </if>
+      <if test="employed != null">
+        employed = #{employed,jdbcType=VARCHAR},
+      </if>
+      <if test="sshow != null">
+        sshow = #{sshow,jdbcType=CHAR},
+      </if>
+    </set>
+    where s_id = #{sId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bysjy.po.Student">
+    update student
+    set name = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=CHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      edu = #{edu,jdbcType=VARCHAR},
+      dept = #{dept,jdbcType=VARCHAR},
+      professional = #{professional,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      birth = #{birth,jdbcType=VARCHAR},
+      home = #{home,jdbcType=VARCHAR},
+      employed = #{employed,jdbcType=VARCHAR},
+      sshow = #{sshow,jdbcType=CHAR}
+    where s_id = #{sId,jdbcType=CHAR}
+  </update>
+</mapper>

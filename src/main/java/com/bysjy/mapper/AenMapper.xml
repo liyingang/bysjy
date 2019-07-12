@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bysjy.mapper.AenMapper">
+  <select id="getAE" resultMap="AEMap">
+    select a.*,e.name,e.tel from enterprise as e,application as a where e.e_id=a.e_id
+  </select>
+    <select id="getVal1" resultType="com.bysjy.po.Val">
+        select s.year,stu,ent from
+        (select left(e_id,4) as year,count(*) as ent from enterprise group by left(e_id,4)) as e,
+        (select left(s_id,4) as year,count(*) as stu from student group by left(s_id,4) ) as s
+        where e.year=s.year
+    </select>
+    <select id="getVal2" resultMap="Val2Map">
+        select s.year,stu,stued from
+        (select left(s_id,4) as year,count(CASE WHEN employed!='未就业' THEN 1 ELSE NULL END) as stued from student  group by left(s_id,4)) as e,
+        (select left(s_id,4) as year,count(*) as stu from student where employed='未就业' group by left(s_id,4) ) as s
+        where e.year=s.year
+    </select>
+    <resultMap id="Val2Map" type="com.bysjy.po.Val">
+        <id property="year" column="year"/>
+        <result column="stu" property="stu"/>
+        <result property="ent" column="stued"/>
+    </resultMap>
+  <resultMap id="AEMap" type="com.bysjy.po.Aen">
+      <id column="e_id" property="eId"/>
+      <result column="name"  property="name" />
+      <result column="a_id"  property="aId" />
+      <result column="tel" property="tel" />
+      <result column="post"  property="post" />
+      <result column="education"  property="education" />
+      <result column="salary"  property="salary" />
+      <result column="num"  property="num" />
+      <result column="declaration"  property="declaration" />
+  </resultMap>
+    <select id="getOther" resultMap="OtherMap">
+        select s.s_id as ssid,s.name,age,sex,s.tel as stel,edu,professional,apply,society,personal,r.sshow as rsshow,e.name as ename,addr,post,salary,declaration
+        from student as s,resume as r,enterprise as e,applyed as a,application as app
+        where s.s_id=a.s_id and s.s_id=r.s_id and a.a_id=app.a_id and app.e_id=e.e_id and s.sshow='1' and s.employed!='未就业'
+    </select>
+    <resultMap id="OtherMap" type="com.bysjy.po.Other">
+        <id column="ssid" property="sId"/>
+        <result column="name" property="name"/>
+        <result column="ename" property="cName"/>
+        <result column="post" property="post"/>
+        <result column="salary" property="salary"/>
+        <result column="stel" property="tel"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <result column="rsshow" property="sshow"/>
+        <result column="edu" property="edu"/>
+        <result column="professional" property="professional"/>
+        <result column="society" property="society"/>
+        <result column="personal" property="personal"/>
+        <result column="declaration" property="declaration"/>
+
+    </resultMap>
+</mapper>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bysjy.mapper.ManagerMapper">
+  <select id="getManagerById" parameterType="String" resultMap="ManagerMap">
+      select * from manager where m_id=#{id}
+  </select>
+    <resultMap id="ManagerMap" type="com.bysjy.po.Manager">
+        <id property="mId" column="m_id"/>
+        <result property="pwd" column="pwd"/>
+    </resultMap>
+</mapper>

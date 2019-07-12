@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bysjy.mapper.ApplicationMapper">
+  <resultMap id="BaseResultMap" type="com.bysjy.po.Application">
+    <id column="a_id" jdbcType="CHAR" property="aId" />
+    <id column="e_id" jdbcType="CHAR" property="eId" />
+    <result column="post" jdbcType="VARCHAR" property="post" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="salary" jdbcType="INTEGER" property="salary" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bysjy.po.Application">
+    <result column="declaration" jdbcType="LONGVARCHAR" property="declaration" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    a_id, e_id, post, education, salary, num
+  </sql>
+  <sql id="Blob_Column_List">
+    declaration
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.bysjy.po.ApplicationKey" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from application
+    where a_id = #{aId,jdbcType=CHAR}
+      and e_id = #{eId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.bysjy.po.ApplicationKey">
+    delete from application
+    where a_id = #{aId,jdbcType=CHAR}
+      and e_id = #{eId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bysjy.po.Application">
+    insert into application (a_id, e_id, post, education, 
+      salary, num, declaration
+      )
+    values (#{aId,jdbcType=CHAR}, #{eId,jdbcType=CHAR}, #{post,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
+      #{salary,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, #{declaration,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bysjy.po.Application">
+    insert into application
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aId != null">
+        a_id,
+      </if>
+      <if test="eId != null">
+        e_id,
+      </if>
+      <if test="post != null">
+        post,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="salary != null">
+        salary,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="declaration != null">
+        declaration,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aId != null">
+        #{aId,jdbcType=CHAR},
+      </if>
+      <if test="eId != null">
+        #{eId,jdbcType=CHAR},
+      </if>
+      <if test="post != null">
+        #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null">
+        #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="declaration != null">
+        #{declaration,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bysjy.po.Application">
+    update application
+    <set>
+      <if test="post != null">
+        post = #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null">
+        salary = #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="declaration != null">
+        declaration = #{declaration,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where a_id = #{aId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bysjy.po.Application">
+    update application
+    set post = #{post,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
+      declaration = #{declaration,jdbcType=LONGVARCHAR}
+    where a_id = #{aId,jdbcType=CHAR}
+      and e_id = #{eId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bysjy.po.Application">
+    update application
+    set post = #{post,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER}
+    where a_id = #{aId,jdbcType=CHAR}
+      and e_id = #{eId,jdbcType=CHAR}
+  </update>
+
+
+  <select id="searchApply" parameterType="String" resultMap="ApplyMap">
+    select * from apply where a_id=#{aId} and s_id=#{sId}
+  </select>
+  <insert id="insertApply" parameterType="com.bysjy.po.Apply" >
+    insert into apply values(#{aId},#{sId})
+  </insert>
+  <resultMap id="ApplyMap" type="com.bysjy.po.Apply">
+    <id property="aId" column="a_id"/>
+    <result property="sId" column="s_id"/>
+  </resultMap>
+</mapper>
